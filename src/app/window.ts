@@ -12,7 +12,8 @@ const createWindow = async () => {
         width: 1200,
         height: 700,
         webPreferences: {
-            nodeIntegration: (integration as unknown) as boolean
+            nodeIntegration: (integration as unknown) as boolean,
+            enableRemoteModule: true
         },
         center: true,
         frame: false,
