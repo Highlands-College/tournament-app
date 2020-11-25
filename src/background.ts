@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, protocol } from 'electron'
+import { app, protocol, ipcMain } from 'electron'
 import { hooks } from '@/app/hooks'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -21,6 +21,18 @@ app.on('ready', async () => {
     await hooks.ready()
 })
 
+ipcMain.handle('minimize-window', async () => {
+    await hooks.minimize()
+})
+
+ipcMain.handle('maximize-window', async () => {
+    await hooks.maximize()
+})
+
+ipcMain.handle('close-window', async () => {
+    await hooks.close()
+})
+
 if (isDevelopment) {
     if (process.platform === 'win32') {
         process.on('message', data => {
@@ -34,5 +46,3 @@ if (isDevelopment) {
         })
     }
 }
-
-export { app }

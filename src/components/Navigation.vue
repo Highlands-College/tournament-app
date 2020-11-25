@@ -34,7 +34,7 @@ export default defineComponent({
     justify-content: space-between;
     align-content: center;
     width: 96%;
-    margin: 10px 2% 0;
+    margin: 10px 2% 20px;
 
     & .routes {
         display: flex;

@@ -1,4 +1,9 @@
 module.exports = {
+    pluginOptions: {
+        electronBuilder: {
+            preload: 'src/app/preload.ts'
+        }
+    },
     css: {
         loaderOptions: {
             sass: {

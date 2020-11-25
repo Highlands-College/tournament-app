@@ -1,10 +1,14 @@
 // @ts-ignore
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, remote } from 'electron'
 import { createWindow } from '@/app/window'
 
 let win: BrowserWindow | null
 const isDevelopment = process.env.NODE_ENV !== 'production'
+const getWindow = () =>
+    (setImmediate(() =>
+        remote.BrowserWindow.getFocusedWindow()
+    ) as unknown) as BrowserWindow
 
 const windowAllClosed = () => {
     if (process.platform !== 'darwin') {
@@ -29,10 +33,26 @@ const ready = async () => {
     await createWindow()
 }
 
+const minimize = async () => {
+    getWindow().minimize()
+}
+
+const maximize = async () => {
+    const window = getWindow()
+    window.isMaximized() ? window.unmaximize() : window.maximize()
+}
+
+const close = async () => {
+    app.exit(0)
+}
+
 const hooks = {
     windowAllClosed,
     active,
-    ready
+    ready,
+    minimize,
+    maximize,
+    close
 }
 
 export { hooks }

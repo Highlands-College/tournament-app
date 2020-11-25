@@ -1,29 +1,52 @@
 <template>
     <div class="draggable">
-        <svg
-            height="12px"
-            viewBox="0 0 329.26933 329"
-            width="12px"
-            @click="close"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-            <path
-                d="m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0"
-            />
-        </svg>
+        <div class="minimize" @click="minimize">
+            <svg aria-hidden="false" width="12" height="12" viewBox="0 0 12 12">
+                <rect fill="#aaaaaa" width="10" height="1" x="1" y="6"></rect>
+            </svg>
+        </div>
+        <div class="maximize" @click="maximize">
+            <svg aria-hidden="false" width="12" height="12" viewBox="0 0 12 12">
+                <rect
+                    width="9"
+                    height="9"
+                    x="1.5"
+                    y="1.5"
+                    fill="none"
+                    stroke="#aaaaaa"
+                ></rect>
+            </svg>
+        </div>
+        <div class="close" @click="close">
+            <svg aria-hidden="false" width="12" height="12" viewBox="0 0 12 12">
+                <polygon
+                    fill="#aaaaaa"
+                    fill-rule="evenodd"
+                    points="11 1.576 6.583 6 11 10.424 10.424 11 6 6.583 1.576 11 1 10.424 5.417 6 1 1.576 1.576 1 6 5.417 10.424 1"
+                ></polygon>
+            </svg>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
+// @ts-nocheck
+
 import { defineComponent } from 'vue'
-// const { app } = require('electron').remote
 
 export default defineComponent({
     name: 'Draggable',
-    methods: {
-        close() {
-            console.log('close')
-            // app.quit()
+    setup() {
+        const minimize = () => window.ipcRenderer.invoke('minimize-window')
+
+        const maximize = () => window.ipcRenderer.invoke('maximize-window')
+
+        const close = () => window.ipcRenderer.invoke('close-window')
+
+        return {
+            minimize,
+            maximize,
+            close
         }
     }
 })
@@ -33,16 +56,19 @@ export default defineComponent({
 .draggable {
     -webkit-app-region: drag;
     width: 100%;
-    height: 30px;
+    height: 22px;
     background-color: $secondary-dark;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 
-    & svg {
+    & div {
         -webkit-app-region: no-drag;
-        fill: $primary-light;
         margin-right: 10px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 </style>
