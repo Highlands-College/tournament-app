@@ -2,8 +2,8 @@
     <div class="add-participants">
         <div class="select-type">
             <select v-model="state.participantType">
-                <option selected disabled value=""
-                    >Select participant type:</option
+                <option selected disabled value="">
+                    Select participant type:</option
                 >
                 <option value="individual">Individual</option>
                 <option value="team">Team</option>
@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
-import { useParticipants } from '@/store/participants'
+import { store } from '@/store'
 
 export default defineComponent({
     name: 'AddParticipants',
@@ -51,22 +51,22 @@ export default defineComponent({
             teamPlayers: ''
         })
 
-        const { addTeam, addIndividuals } = useParticipants()
+        // const { addTeam, addIndividuals } = useParticipants()
 
-        const submitTeam = () => {
-            const name = state.teamName
-            const players = state.teamPlayers.split(',')
+        // const submitTeam = () => {
+        //     const name = state.teamName
+        //     const players = state.teamPlayers.split(',')
 
-            const filteredPlayers: string[] = []
-            players.forEach(value => filteredPlayers.push(value.trim()))
+        //     const filteredPlayers: string[] = []
+        //     players.forEach(value => filteredPlayers.push(value.trim()))
 
-            addTeam(name, filteredPlayers)
-        }
+        //     addTeam(name, filteredPlayers)
+        // }
 
         return {
-            state,
-            submitTeam,
-            addIndividuals
+            state
+            // submitTeam,
+            // addIndividuals
         }
     }
 })

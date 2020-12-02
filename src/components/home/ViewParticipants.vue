@@ -11,12 +11,15 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from 'vue'
-import { useParticipants } from '@/store/participants'
+import { store } from '@/store'
+import { Globals } from '@/globals.d.ts'
 
 export default defineComponent({
     name: 'ViewParticipants',
     setup() {
-        const { state } = useParticipants()
+        // @ts-ingore
+        const state: Globals.Participants = (store.state
+            .participants as unknown) as Globals.Participants
 
         return { state }
     }
