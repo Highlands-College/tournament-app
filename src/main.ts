@@ -1,15 +1,16 @@
 // @ts-nocheck
 
+// Imports
 import { createApp } from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
-import { store } from './store'
+import { participantsSymbol, createParticipants } from '@/store/participants'
 
 const init = async () => {
     const app = createApp(App)
+    app.provide(participantsSymbol, createParticipants())
     app.use(router)
-    app.use(store)
     app.mount('#app')
 }
 

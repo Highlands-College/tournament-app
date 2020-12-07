@@ -1,29 +1,32 @@
 <template>
     <div class="view-participants">
-        <div v-if="state">
+        <div>
             <pre>{{ state }}</pre>
         </div>
-        <div v-else>
-            <p>No participants</p>
-        </div>
+        <div></div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
-import { store } from '@/store'
-import { Globals } from '@/globals.d.ts'
+import { defineComponent, inject } from 'vue'
+import { participantsSymbol } from '@/store/participants'
 
 export default defineComponent({
     name: 'ViewParticipants',
     setup() {
-        // @ts-ingore
-        const state: Globals.Participants = (store.state
-            .participants as unknown) as Globals.Participants
-
-        return { state }
+        return {
+            state: inject(participantsSymbol)
+        }
     }
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.view-participants {
+    display: flex;
+
+    & div {
+        flex: 1;
+    }
+}
+</style>

@@ -4,9 +4,10 @@
         <div class="split">
             <div class="add">
                 <AddParticipants />
+            </div>
+            <div class="entered">
                 <ViewParticipants />
             </div>
-            <div class="entered"></div>
         </div>
     </div>
 </template>

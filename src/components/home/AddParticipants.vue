@@ -38,8 +38,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from 'vue'
-import { store } from '@/store'
+import { defineComponent, reactive, inject } from 'vue'
+import { participantsSymbol } from '@/store/participants'
+import { Globals } from '@/globals'
 
 export default defineComponent({
     name: 'AddParticipants',
@@ -51,22 +52,24 @@ export default defineComponent({
             teamPlayers: ''
         })
 
-        // const { addTeam, addIndividuals } = useParticipants()
+        const { addTeam, addIndividuals } = inject(
+            participantsSymbol
+        ) as Globals.useParticipants
 
-        // const submitTeam = () => {
-        //     const name = state.teamName
-        //     const players = state.teamPlayers.split(',')
+        const submitTeam = () => {
+            const name = state.teamName
+            const players = state.teamPlayers.split(',')
 
-        //     const filteredPlayers: string[] = []
-        //     players.forEach(value => filteredPlayers.push(value.trim()))
+            const filteredPlayers: string[] = []
+            players.forEach(value => filteredPlayers.push(value.trim()))
 
-        //     addTeam(name, filteredPlayers)
-        // }
+            addTeam(name, filteredPlayers)
+        }
 
         return {
-            state
-            // submitTeam,
-            // addIndividuals
+            state,
+            submitTeam,
+            addIndividuals
         }
     }
 })
