@@ -3,13 +3,13 @@
         <div class="select-type">
             <select v-model="state.participantType">
                 <option selected disabled value="">
-                    Select participant type:</option
-                >
+                    Select participant type:
+                </option>
                 <option value="individual">Individual</option>
                 <option value="team">Team</option>
             </select>
         </div>
-        <div class="team-input">
+        <div class="input">
             <div v-if="state.participantType === 'individual'">
                 <input
                     type="text"
@@ -75,4 +75,18 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.add-participants {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+
+    & .select-type {
+        width: 100%;
+
+        & select {
+            width: 100%;
+        }
+    }
+}
+</style>

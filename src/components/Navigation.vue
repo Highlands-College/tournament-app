@@ -2,12 +2,9 @@
     <div class="nav">
         <p>Tournament App</p>
         <div class="routes">
-            <router-link
-                v-for="(route, i) in routes"
-                :key="i"
-                :to="route.path"
-                >{{ route.name }}</router-link
-            >
+            <router-link v-for="(route, i) in routes" :key="i" :to="route.path">
+                {{ route.name }}
+            </router-link>
         </div>
     </div>
 </template>
@@ -41,17 +38,26 @@ export default defineComponent({
         align-items: center;
 
         & a {
-            &:not(:last-of-type) {
-                margin-right: 20px;
+            background-color: #dddddd;
+            padding: 10px;
+
+            &:first-of-type {
+                border-bottom-left-radius: 10px;
+                border-top-left-radius: 10px;
+            }
+
+            &:last-of-type {
+                border-bottom-right-radius: 10px;
+                border-top-right-radius: 10px;
             }
 
             &:hover {
-                color: $accent;
+                background-color: #cccccc;
             }
         }
 
         & .router-link-exact-active {
-            text-decoration: underline;
+            background-color: #cccccc;
         }
     }
 }

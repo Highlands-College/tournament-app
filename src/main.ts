@@ -16,6 +16,8 @@ const init = async () => {
 
 init().then(() => console.log('Successfully initialized app'))
 
-if (window.ipcRenderer !== null)
-    console.log('App connected to Electron main process')
-else console.log('Error while connecting to Electron')
+console.log(
+    window.ipcRenderer !== null
+        ? 'App connected to Electron main process'
+        : 'Error while connecting to Electron'
+)

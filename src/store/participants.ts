@@ -33,19 +33,12 @@ const createParticipants: Globals.createParticipants = () => {
         } else if (name.length === 0) {
             return alert('No name added')
         }
-        // else if () {
-        //     return alert('Name already taken')
-        // }
-
-        console.log(state.individuals.filter((n: string) => n !== name))
-        console.log(state.individuals.filter((n: string) => n))
 
         const individual: Globals.Individual = {
             name,
             score: 0
         }
 
-        console.log(`Added ${individual.name}`)
         state.individuals.push(individual)
     }
 

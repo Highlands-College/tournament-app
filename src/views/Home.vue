@@ -17,18 +17,11 @@ import { defineComponent } from 'vue'
 import AddParticipants from '@/components/home/AddParticipants.vue'
 import ViewParticipants from '@/components/home/ViewParticipants.vue'
 
-const onChange = e => console.log(e)
-
 export default defineComponent({
     name: 'Home',
     components: {
         AddParticipants,
         ViewParticipants
-    },
-    setup() {
-        return {
-            onChange
-        }
     }
 })
 </script>
@@ -46,16 +39,10 @@ export default defineComponent({
         display: flex;
         align-items: flex-start;
 
-        & .add {
+        & .add,
+        .entered {
             height: 100px;
             flex: 1;
-            background-color: blue;
-        }
-
-        & .entered {
-            height: 100px;
-            flex: 1;
-            background-color: red;
         }
     }
 }
