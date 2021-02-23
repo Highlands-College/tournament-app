@@ -37,8 +37,6 @@ import { participantsSymbol } from '@/store/participants'
 export default defineComponent({
     name: 'ViewParticipants',
     setup() {
-        console.log(inject(participantsSymbol))
-
         return {
             state: inject(participantsSymbol)
         }
